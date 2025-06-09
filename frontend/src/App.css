@@ -1,38 +1,206 @@
-.App {
-    text-align: center;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.App-logo {
-    height: 40vmin;
-    pointer-events: none;
+.app {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #000;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-        animation: App-logo-spin infinite 20s linear;
-    }
+.camera-feed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
 }
 
-.App-header {
-    background-color: #0f0f10;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  pointer-events: none;
 }
 
-.App-link {
-    color: #61dafb;
+.right-controls {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  pointer-events: all;
 }
 
-@keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+.control-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.control-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+.control-btn svg {
+  width: 24px;
+  height: 24px;
+}
+
+.control-btn .count {
+  font-size: 10px;
+  font-weight: 600;
+  color: white;
+}
+
+.heart-btn:hover {
+  color: #ff3040;
+  background: rgba(255, 48, 64, 0.2);
+}
+
+.record-btn {
+  width: 68px;
+  height: 68px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 3px solid white;
+}
+
+.record-circle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #ff3040;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.inner-circle {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: white;
+}
+
+.record-btn:hover .record-circle {
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.bottom-controls {
+  position: absolute;
+  bottom: 120px;
+  left: 16px;
+  right: 80px;
+  pointer-events: all;
+}
+
+.user-info {
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.username {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.description {
+  font-size: 14px;
+  line-height: 1.4;
+  opacity: 0.9;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .right-controls {
+    right: 8px;
+    gap: 20px;
+  }
+  
+  .control-btn {
+    width: 44px;
+    height: 44px;
+  }
+  
+  .record-btn {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .bottom-controls {
+    bottom: 100px;
+    left: 12px;
+    right: 70px;
+  }
+  
+  .username {
+    font-size: 15px;
+  }
+  
+  .description {
+    font-size: 13px;
+  }
+}
+
+/* Portrait orientation optimization */
+@media (orientation: portrait) {
+  .camera-feed {
+    object-position: center;
+  }
+}
+
+/* Landscape mobile adjustments */
+@media (max-height: 500px) and (orientation: landscape) {
+  .right-controls {
+    gap: 16px;
+    right: 16px;
+  }
+  
+  .control-btn {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .record-btn {
+    width: 52px;
+    height: 52px;
+  }
+  
+  .bottom-controls {
+    bottom: 20px;
+  }
 }
